@@ -1,0 +1,8 @@
+services:
+  testbot:
+    build: .
+    environment:
+    - ASSET_VALUE_API_URL=${ASSET_VALUE_API_URL}
+    - FREQUENCY_MS=${FREQUENCY_MS}
+    - VALUES_LENGHT=${VALUES_LENGHT}
+    - TREND_CHANGE_CONDITION=${TREND_CHANGE_CONDITION}

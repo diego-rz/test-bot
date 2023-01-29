@@ -1,17 +1,19 @@
 const axios = require('axios')
 require('dotenv').config()
 
+const ASSET_VALUE_API_URL = process.env.ASSET_VALUE_API_URL ?? ""
+
 // Number of measurements to calculate EMA
-const VALUES_LENGHT = 10
+const VALUES_LENGHT = process.env.VALUES_LENGHT ?? 10
 
 // Measurement frequency in ms
-const FREQUENCY_MS = 60000
+const FREQUENCY_MS = process.env.FREQUENCY_MS ?? 60000
 
 // Constant to calculate EMA
 const MULT = 2 / (VALUES_LENGHT + 1)
 
 // Number of measurements necessary to consider an asset trenging change
-const TREND_CHANGE_CONDITION = 4
+const TREND_CHANGE_CONDITION = process.env.TREND_CHANGE_CONDITION ?? 4
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -72,7 +74,7 @@ async function run() {
 	while (true) {
 
 		let measur = undefined
-		axios.get(process.env.ASSET_VALUE_API_URL).then(response => {
+		axios.get(ASSET_VALUE_API_URL).then(response => {
 			measur = response.data
 			console.log({ id: measur.data.id, priceUsd: measur.data.priceUsd, date: new Date(measur.timestamp) })
 
